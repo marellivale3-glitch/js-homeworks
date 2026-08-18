@@ -4,27 +4,47 @@ var services = {
     hairWash: "100 UAH",
 
     price: function() {
-        return parseInt(services.haircut) +
-               parseInt(services.shaving) +
-               parseInt(services.hairWash);
+        let total = 0;
+
+        for (let key in this) {
+            if (typeof this[key] === "string") {
+                total += parseInt(this[key]);
+            }
+        }
+
+        return total;
     },
 
     minPrice: function() {
-        return Math.min(
-            parseInt(services.haircut),
-            parseInt(services.shaving),
-            parseInt(services.hairWash)
-        );
+        let prices = [];
+
+        for (let key in this) {
+            if (typeof this[key] === "string") {
+                prices.push(parseInt(this[key]));
+            }
+        }
+
+        return Math.min(...prices);
     },
 
     maxPrice: function() {
-        return Math.max(
-            parseInt(services.haircut),
-            parseInt(services.shaving),
-            parseInt(services.hairWash)
-        );
+        let prices = [];
+
+        for (let key in this) {
+            if (typeof this[key] === "string") {
+                prices.push(parseInt(this[key]));
+            }
+        }
+
+        return Math.max(...prices);
     }
 };
+
+console.log(services.price());
+console.log(services.minPrice());
+console.log(services.maxPrice());
+
+services.brokenGlass = "200 UAH";
 
 console.log(services.price());
 console.log(services.minPrice());
